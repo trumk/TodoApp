@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Todo } from '../../types';
 
 interface Props {
@@ -35,15 +35,23 @@ const TodoItem: React.FC<Props> = ({ todo, onComplete, onDelete, onEdit }) => {
             onChangeText={setNewDescription}
             placeholder="Edit description"
           />
-          <Button title="Save" onPress={handleSave} />
+          <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+            <Text style={styles.buttonText}>Save</Text>
+          </TouchableOpacity>
         </>
       ) : (
         <>
           <Text style={styles.title}>{todo.title}</Text>
-          <Text>{todo.description}</Text>
-          <Button title={todo.isCompleted ? 'Completed' : 'Mark Complete'} onPress={onComplete} />
-          <Button title="Edit" onPress={() => setIsEditing(true)} />
-          <Button title="Delete" onPress={onDelete} />
+          <Text style={styles.description}>{todo.description}</Text>
+          <TouchableOpacity style={styles.completeButton} onPress={onComplete}>
+            <Text style={styles.buttonText}>{todo.isCompleted ? 'Completed' : 'Mark Complete'}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.editButton} onPress={() => setIsEditing(true)}>
+            <Text style={styles.buttonText}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
+            <Text style={styles.buttonText}>Delete</Text>
+          </TouchableOpacity>
         </>
       )}
     </View>
@@ -52,21 +60,67 @@ const TodoItem: React.FC<Props> = ({ todo, onComplete, onDelete, onEdit }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 15,
     margin: 10,
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 5,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+  description: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 15,
   },
   input: {
     borderWidth: 1,
-    borderColor: 'gray',
-    padding: 8,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 8,
     marginBottom: 10,
+    fontSize: 16,
+  },
+  completeButton: {
+    backgroundColor: '#4CAF50', 
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  editButton: {
+    backgroundColor: '#2196F3', 
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  deleteButton: {
+    backgroundColor: '#f44336', 
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  saveButton: {
+    backgroundColor: '#2196F3', 
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 

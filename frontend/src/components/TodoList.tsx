@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import TodoItem from './TodoItem';
 import { Todo } from '../../types';
 
@@ -12,18 +12,29 @@ interface Props {
 
 const TodoList: React.FC<Props> = ({ todos, onComplete, onDelete, onEdit }) => {
   return (
-    <View>
-      {todos.map((todo) => (
-        <TodoItem
-          key={todo._id}
-          todo={todo}
-          onComplete={() => onComplete(todo._id!)}
-          onDelete={() => onDelete(todo._id!)}
-          onEdit={(newTitle, newDescription) => onEdit(todo._id!, newTitle, newDescription)}
-        />
-      ))}
-    </View>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        {todos.map((todo) => (
+          <TodoItem
+            key={todo._id}
+            todo={todo}
+            onComplete={() => onComplete(todo._id!)}
+            onDelete={() => onDelete(todo._id!)}
+            onEdit={(newTitle, newDescription) => onEdit(todo._id!, newTitle, newDescription)}
+          />
+        ))}
+      </View>
+    </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    paddingBottom: 20,
+  },
+  container: {
+    padding: 10,
+  },
+});
 
 export default TodoList;
