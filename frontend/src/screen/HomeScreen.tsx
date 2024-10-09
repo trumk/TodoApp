@@ -9,12 +9,9 @@ interface Props {
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to the Todo App</Text>
+      <Text style={styles.title}>Welcome to My App</Text>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TodoScreen')}>
         <Text style={styles.buttonText}>Go to Todos</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.converterButton} onPress={() => navigation.navigate('ConverterScreen')}>
-        <Text style={styles.buttonText}>Unit Converter</Text>
       </TouchableOpacity>
     </View>
   );
@@ -37,18 +34,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#4CAF50',
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-    borderRadius: 8,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  converterButton: {
-    backgroundColor: '#FF9800', 
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 8,

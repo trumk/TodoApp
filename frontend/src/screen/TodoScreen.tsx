@@ -7,7 +7,7 @@ const TodoScreen: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [title, setTitle] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const apiURL = 'http://192.168.1.10:5000'; 
+  const apiURL = 'http://10.22.40.108:5000'; 
 
   useEffect(() => {
     fetchTodos();
@@ -39,7 +39,7 @@ const TodoScreen: React.FC = () => {
       const data = await response.json();
       setTodos([...todos, data]);
       setTitle('');
-      setErrorMessage(null);  // Clear error if successful
+      setErrorMessage(null);  
     } catch (error) {
       console.error('Error adding todo:', error);
     }
